@@ -1,6 +1,17 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Container, Content, Header, Body, Title} from 'native-base';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {
+  Button,
+  Container,
+  Content,
+  Header,
+  Body,
+  Title,
+  Text,
+  Card,
+  H3,
+  H1,
+} from 'native-base';
 
 import Icons from './components/Icons';
 import Snackbar from 'react-native-snackbar';
@@ -8,9 +19,17 @@ import Snackbar from 'react-native-snackbar';
 const App = () => {
   const [isCross, setIsCross] = useState(false);
   const [winMessage, setWinMessage] = useState('');
+
+  const itemArray = new Array(9).fill('empty');
+
   const changeItem = (itemNumber) => {};
 
-  const reloadGame = () => {};
+  const reloadGame = () => {
+    setIsCross(false);
+    setWinMessage('');
+    itemArray.fill('empty', 0, 9);
+    console.log(itemArray);
+  };
 
   const checkIsWinner = () => {};
 
@@ -23,8 +42,24 @@ const App = () => {
       </Header>
       <Content>
         <View style={styles.grid}>
-          <Icons />
+          {itemArray.map((item, index) => (
+            <TouchableOpacity style={styles.box} key={index}>
+              <Card style={styles.card}>
+                <Icons />
+              </Card>
+            </TouchableOpacity>
+          ))}
         </View>
+        {winMessage ? (
+          <View>
+            <H1 style={styles.message}>{winMessage}</H1>
+            <Button onPress={reloadGame} primary rounded block>
+              <Text>Reload Game</Text>
+            </Button>
+          </View>
+        ) : (
+          <H3 style={styles.message}>{isCross ? 'Cross' : 'Circle'} turns</H3>
+        )}
       </Content>
     </Container>
   );
@@ -57,5 +92,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
     marginTop: 20,
     paddingVertical: 10,
+    marginVertical: 10,
   },
 });
