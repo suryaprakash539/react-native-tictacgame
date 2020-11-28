@@ -105,10 +105,12 @@ const App = () => {
   };
 
   return (
-    <Container style={{backgroundColor: '333945', padding: 5}}>
+    <Container style={{backgroundColor: '#67E6DC', padding: 5}}>
       <Header>
         <Body>
-          <Title>Surya's TicTacToe Game</Title>
+          <Title style={{alignSelf: 'center', color: '#FFF222'}}>
+            Surya's TicTacToe Game
+          </Title>
         </Body>
       </Header>
       <Content>
