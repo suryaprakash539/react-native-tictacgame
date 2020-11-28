@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Button, Container, Content} from 'native-base';
 
 const App = () => {
   return <></>;
