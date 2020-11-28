@@ -8,7 +8,7 @@ const Icons = ({name}) => {
     case 'cross':
       return <Icon name="times" size={45} color="#10A881" />;
     default:
-      return <Icon name="pencil" size={45} color="#303030" />;
+      return <Icon name="pencil" size={45} color="#a13d63" />;
   }
 };
 
