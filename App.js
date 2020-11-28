@@ -102,6 +102,11 @@ const App = () => {
       itemArray[2] !== 'empty'
     )
       setWinMessage(`${itemArray[2]} won`);
+    //Draw Status
+    let drawStatus = itemArray.filter((item) => item === 'empty');
+    if (drawStatus.length === 1) {
+      setWinMessage('Game has been draw');
+    }
   };
 
   return (
