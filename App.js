@@ -15,23 +15,94 @@ import {
 
 import Icons from './components/Icons';
 import Snackbar from 'react-native-snackbar';
+const itemArray = new Array(9).fill('empty');
 
 const App = () => {
   const [isCross, setIsCross] = useState(false);
   const [winMessage, setWinMessage] = useState('');
 
-  const itemArray = new Array(9).fill('empty');
+  const changeItem = (itemNumber) => {
+    // console.log(itemArray);
+    // console.log(itemNumber, 'surya');
+    if (winMessage) {
+      return Snackbar.show({
+        text: winMessage,
+        backgroundColor: '#000',
+        textColor: '#FFF',
+      });
+    }
 
-  const changeItem = (itemNumber) => {};
+    if (itemArray[itemNumber] === 'empty') {
+      itemArray[itemNumber] = isCross ? 'cross' : 'circle';
+      setIsCross(!isCross);
+    } else {
+      return Snackbar.show({
+        text: 'position already filled',
+        backgroundColor: 'red',
+        textColor: 'white',
+      });
+    }
+
+    checkIsWinner();
+  };
 
   const reloadGame = () => {
     setIsCross(false);
     setWinMessage('');
     itemArray.fill('empty', 0, 9);
-    console.log(itemArray);
+    // console.log(itemArray);
   };
 
-  const checkIsWinner = () => {};
+  const checkIsWinner = () => {
+    if (
+      itemArray[0] === itemArray[1] &&
+      itemArray[1] === itemArray[2] &&
+      itemArray[0] !== 'empty'
+    )
+      setWinMessage(`${itemArray[0]} won`);
+    else if (
+      itemArray[3] === itemArray[4] &&
+      itemArray[4] === itemArray[5] &&
+      itemArray[3] !== 'empty'
+    )
+      setWinMessage(`${itemArray[3]} won`);
+    else if (
+      itemArray[6] === itemArray[7] &&
+      itemArray[7] === itemArray[8] &&
+      itemArray[6] !== 'empty'
+    )
+      setWinMessage(`${itemArray[6]} won`);
+    else if (
+      itemArray[0] === itemArray[4] &&
+      itemArray[4] === itemArray[8] &&
+      itemArray[0] !== 'empty'
+    )
+      setWinMessage(`${itemArray[0]} won`);
+    else if (
+      itemArray[2] === itemArray[4] &&
+      itemArray[4] === itemArray[6] &&
+      itemArray[2] !== 'empty'
+    )
+      setWinMessage(`${itemArray[2]} won`);
+    else if (
+      itemArray[0] === itemArray[3] &&
+      itemArray[3] === itemArray[6] &&
+      itemArray[0] !== 'empty'
+    )
+      setWinMessage(`${itemArray[0]} won`);
+    else if (
+      itemArray[1] === itemArray[4] &&
+      itemArray[4] === itemArray[7] &&
+      itemArray[1] !== 'empty'
+    )
+      setWinMessage(`${itemArray[1]} won`);
+    else if (
+      itemArray[2] === itemArray[5] &&
+      itemArray[5] === itemArray[8] &&
+      itemArray[2] !== 'empty'
+    )
+      setWinMessage(`${itemArray[2]} won`);
+  };
 
   return (
     <Container style={{backgroundColor: '333945', padding: 5}}>
@@ -43,9 +114,12 @@ const App = () => {
       <Content>
         <View style={styles.grid}>
           {itemArray.map((item, index) => (
-            <TouchableOpacity style={styles.box} key={index}>
+            <TouchableOpacity
+              style={styles.box}
+              key={index}
+              onPress={() => changeItem(index)}>
               <Card style={styles.card}>
-                <Icons />
+                <Icons name={item} />
               </Card>
             </TouchableOpacity>
           ))}
