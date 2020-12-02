@@ -131,21 +131,14 @@ const App = () => {
         </View>
         {winMessage ? (
           <View>
-            <H1 style={styles.message}>{winMessage}</H1>
-            <Button onPress={reloadGame} primary rounded block>
-              <Text>Reload Game</Text>
-            </Button>
+            <H1 style={[styles.message, {color: 'yellow'}]}>{winMessage}</H1>
           </View>
         ) : (
           <H3 style={styles.message}>{isCross ? 'Cross' : 'Circle'} turns</H3>
         )}
-        {len === 0 ? (
-          <Button onPress={reloadGame} primary rounded block>
-            <Text>Reload Game it's a draw</Text>
-          </Button>
-        ) : (
-          <></>
-        )}
+        <Button onPress={reloadGame} primary rounded block>
+          <Text>Reload Game</Text>
+        </Button>
       </Content>
     </Container>
   );
