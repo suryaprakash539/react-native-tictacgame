@@ -104,6 +104,9 @@ const App = () => {
       setWinMessage(`${itemArray[2]} won`);
   };
 
+  const len = itemArray.filter((item) => item === 'empty').length;
+  console.log(len, 'length');
+
   return (
     <Container style={{backgroundColor: '#67E6DC', padding: 5}}>
       <Header>
@@ -135,6 +138,13 @@ const App = () => {
           </View>
         ) : (
           <H3 style={styles.message}>{isCross ? 'Cross' : 'Circle'} turns</H3>
+        )}
+        {len === 0 ? (
+          <Button onPress={reloadGame} primary rounded block>
+            <Text>Reload Game it's a draw</Text>
+          </Button>
+        ) : (
+          <></>
         )}
       </Content>
     </Container>
